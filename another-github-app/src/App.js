@@ -1,26 +1,49 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      github: [],
+      githubText: ''
+    };
+  }
+
+  componentDidMount() {
+    console.log('componentDidMount');
+    fetch('https://api.github.com/users/Blacksheep3y')
+    .then(res => res.data.json())
+    .then(githubber => this.setState({ github: githubber.avatar_url }))
+    .catch(err => {
+      console.log("Err: ", err);
+    });
+  }
+  
+  fetchGithub = e => {
+    // // e.preventDefault();
+  
+    // fetch(`https://api.github.com/users/Blacksheep3y`)
+    // .then(res => res.json())
+    // // .then()
+    // .catch(err => {
+    //   console.log("Err: ", err);
+    // });
+  };
+  
+  render() {
+    console.log(this.state);
+    return (
+      <div>
+        <h1>Hello Github User!</h1>
+        <div className="github">
+          {this.state.github.map(githubber => (
+            <img width="200" src={githubber} alt={githubber} />
+          ))}
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
