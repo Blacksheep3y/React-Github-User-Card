@@ -4,6 +4,7 @@ import { Route } from "react-router-dom";
 
 import Nav from './components/Nav';
 import User from './components/User';
+import Followers from './components/Followers';
 
 
 class App extends React.Component {
@@ -37,38 +38,33 @@ class App extends React.Component {
     this.setState({ githubText: e.target.value });
   };
 
-  fetchGithub = e => {
-    // e.preventDefault();
-
-    // fetch(this.state.github.avatar_url)
-    //   .then(res => res.json())
-    //   .then(githubber => this.setState({ github: githubber }))
-    //   .catch(err => console.log("Err: ", err));
-  };
-
   render() {
     return (
       <div>
-          {/* <input
-            type="text"
-            value={this.state.githubText}
-            onChange={this.handleChanges}
-          />
-          <button onClick={this.fetchGithub}>Fetch Github User Image</button> */}
-          
           {/* Console.log GITHUB DATA */}
           {console.log('THIS IS this.state:', this.state) }
-
-          {/* EXAMPLE OF PASSING TO PROP: (can call this by doing 'this.state.props.user' <Usercard user={this.state.github.login} /> */}
+        
         <Route path="/">
-        <div className="navbar">
-        <h1>Hello Github User!</h1>
-        <Nav />
-        </div>
-        <div className="user">
-        <User user={this.state.github.login} />
-        </div>
+           <Nav />
         </Route>
+        <Route exact path="/">
+          <div className="user-black2">
+            <h1>Hello Github User {this.state.github.login}!</h1>
+          </div>
+          <User 
+            user={this.state.github.login}
+            userImg={this.state.github.avatar_url}
+            followers={this.state.github.followers}
+            following={this.state.github.following}
+            location={this.state.github.location}
+            bio={this.state.github.bio}
+            />
+        </Route>
+
+        <Route exact path="/followers">
+        <Followers followers_url={this.state.github.followers_url} />
+        </Route>
+
       </div>
     );
   }

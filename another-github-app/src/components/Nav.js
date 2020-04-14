@@ -3,9 +3,15 @@ import { Link } from "react-router-dom";
 
 const Nav = props => {
     return (
-        <Link to="/">
-            <div>Home</div>
-        </Link>
+        <div className="navbar">
+            <Link to="/">
+                <div>Home</div>
+            </Link>
+
+            <Link to="/followers">
+                <div>Followers</div>
+            </Link>
+        </div>
       );
 };
 
