@@ -1,5 +1,10 @@
 import React from 'react';
 import './App.css';
+import { Route } from "react-router-dom";
+
+import Nav from './components/Nav';
+import User from './components/User';
+
 
 class App extends React.Component {
   constructor() {
@@ -33,28 +38,37 @@ class App extends React.Component {
   };
 
   fetchGithub = e => {
-    e.preventDefault();
+    // e.preventDefault();
 
-    fetch(this.state.github.avatar_url)
-      .then(res => res.json())
-      .then(githubber => this.setState({ github: githubber }))
-      .catch(err => console.log("Err: ", err));
+    // fetch(this.state.github.avatar_url)
+    //   .then(res => res.json())
+    //   .then(githubber => this.setState({ github: githubber }))
+    //   .catch(err => console.log("Err: ", err));
   };
 
   render() {
     return (
       <div>
+          {/* <input
+            type="text"
+            value={this.state.githubText}
+            onChange={this.handleChanges}
+          />
+          <button onClick={this.fetchGithub}>Fetch Github User Image</button> */}
+          
+          {/* Console.log GITHUB DATA */}
+          {console.log('THIS IS this.state:', this.state) }
+
+          {/* EXAMPLE OF PASSING TO PROP: (can call this by doing 'this.state.props.user' <Usercard user={this.state.github.login} /> */}
+        <Route path="/">
+        <div className="navbar">
         <h1>Hello Github User!</h1>
-        <input
-          type="text"
-          value={this.state.githubText}
-          onChange={this.handleChanges}
-        />
-        <button onClick={this.fetchGithub}>Fetch Github User Image</button>
-        <p>{this.state.github.login}</p>
-        <img src={this.state.github.avatar_url} />
-        {/* Console.log GITHUB DATA */}
-        {console.log('THIS IS this.state:', this.state) }
+        <Nav />
+        </div>
+        <div className="user">
+        <User user={this.state.github.login} />
+        </div>
+        </Route>
       </div>
     );
   }
