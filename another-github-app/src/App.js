@@ -11,40 +11,49 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
     fetch('https://api.github.com/users/Blacksheep3y')
-    // .then(res => console.log('Before: ', res))
     .then(res => res.json())
-    // .then(res => console.log('After: ', res))
-    .then(githubber => {this.setState({ github: githubber})})
+    .then(githubber => {
+      this.setState({ github: githubber });
+    })
     .catch(err => {
       console.log("Err: ", err);
     });
   }
   
-  fetchGithub = e => {
-    // // e.preventDefault();
-  
-    // fetch(`https://api.github.com/users/Blacksheep3y`)
-    // .then(res => res.json())
-    // // .then()
-    // .catch(err => {
-    //   console.log("Err: ", err);
-    // });
+  componentDidUpdate(prevProps, prevState) {
+    // update the state
+    if (prevState.github !== this.state.github) {
+      console.log("New Github User!");
+    }
+  }
+
+  handleChanges = e => {
+    this.setState({ githubText: e.target.value });
   };
-  
+
+  fetchGithub = e => {
+    e.preventDefault();
+
+    fetch(this.state.github.avatar_url)
+      .then(res => res.json())
+      .then(githubber => this.setState({ github: githubber }))
+      .catch(err => console.log("Err: ", err));
+  };
+
   render() {
-    // console.log(this.state);
     return (
       <div>
         <h1>Hello Github User!</h1>
-        {/* <div className="github">
-          {this.state.github.map(githubber => (
-            <img width="200" src={githubber} alt={githubber} />
-          ))}
-        </div> */}
+        <input
+          type="text"
+          value={this.state.githubText}
+          onChange={this.handleChanges}
+        />
+        <button onClick={this.fetchGithub}>Fetch Github User Image</button>
         <p>{this.state.github.login}</p>
         <img src={this.state.github.avatar_url} />
+        {/* Console.log GITHUB DATA */}
         {console.log('THIS IS this.state:', this.state) }
       </div>
     );
