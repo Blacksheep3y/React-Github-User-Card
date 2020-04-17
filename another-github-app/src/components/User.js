@@ -6,7 +6,7 @@ const User = props => {
         <div>
         <dl className="user-black">
             <dt className="user2">{props.user}</dt>
-            <img src={props.userImg} />
+            <img src={props.userImg} alt="A handsome man, sipping tea in your hood." />
             <p>Followers: {props.followers}</p>
             <p>Following: {props.following}</p>
             <p className="local">Location: {props.location}</p>

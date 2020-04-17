@@ -98,3 +98,16 @@ p {
     font-size: 0.5em;
     font-weight: 400;
 }
+
+.follower-login-name {
+    font-family: 'Russo One', sans-serif;
+    color: #222;
+    opacity: 75%;
+    font-size: 2.5em;
+    font-weight: 400;
+}
+
+.my-followers {
+    display: flex;
+    flex-wrap: wrap;
+}

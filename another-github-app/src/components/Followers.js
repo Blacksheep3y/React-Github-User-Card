@@ -30,11 +30,18 @@ class Followers extends React.Component {
     render() {
         return (
           <div>
-         <Follower login={this.state.followers} />
-          {console.log('FOLLOWERS STUFF:', this.state) }
-            <dl className="user-black">
-                <dt className="user2"></dt>
-            </dl>
+          <Follower
+            follower_login={this.state.followers.map(x => x.login)}
+            follower_avatar_url={this.state.followers.map(x => x.avatar_url)}
+            follower_url={this.state.followers.map(x => x.url)}
+            follower_followers_url={this.state.followers.map(x => x.followers_url)}
+            follower_following_url={this.state.followers.map(x => x.following_url)}
+          />
+
+          {/* MY OLD CONSOLE.LOGS: 
+          {console.log('Followers JS (this.state ONLY):', this.state) }
+          {console.log('Followers JS (this.state.FOLLOWERS.map[]):', this.state.followers.map(x => x)) }
+          {console.log('Followers JS (this.state.FOLLOWERS.map[].login):', this.state.followers.map(x => x.login)) } */}
           </div>
         );
       }

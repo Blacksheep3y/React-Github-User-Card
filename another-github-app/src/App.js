@@ -41,12 +41,11 @@ class App extends React.Component {
   render() {
     return (
       <div>
-          {/* Console.log GITHUB DATA */}
-          {console.log('THIS IS this.state:', this.state) }
-        
+      {console.log('APP.JS (this.state):', this.state) }
         <Route path="/">
            <Nav />
         </Route>
+        
         <Route exact path="/">
           <div className="user-black2">
             <h1>Hello Github User {this.state.github.login}!</h1>
@@ -62,7 +61,7 @@ class App extends React.Component {
         </Route>
 
         <Route exact path="/followers">
-        <Followers followers_url={this.state.github.followers_url} />
+        <Followers/>
         </Route>
 
       </div>
